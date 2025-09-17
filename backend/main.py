@@ -1,13 +1,16 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from starlette import status
 from starlette.responses import RedirectResponse
 
-from auth import oauth2_scheme, create_access_token
+from auth import oauth2_scheme
 from core.config import settings
-from api.v1 import login
+from api.v1 import login, users
 from jose import jwt, JWTError
 from schemas import TokenData
+from db.database import create_tables
+
+create_tables()
 
 app = FastAPI(
     title="FastAPITest",
@@ -25,6 +28,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.on_event("startup")
+def on_startup():
+    create_tables()
 
 async def get_current_user(token: str = Depends(oauth2_scheme)):
     credentials_exception = HTTPException(
@@ -55,7 +61,8 @@ async def read_users_me(current_user: TokenData = Depends(get_current_user)):
     return current_user
 
 
-app.include_router(login.router, prefix="/api/v1", tags=["login"])
+app.include_router(login.router, prefix="/api/v1/login", tags=["login"])
+app.include_router(users.router, prefix="/api/v1/users", tags=["users"])
 
 
 if __name__ == "__main__":

@@ -8,7 +8,7 @@ const Login = ({ setToken }: { setToken: (token: string) => void }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:8000/api/v1/token', {
+      const response = await fetch('http://localhost:8000/api/v1/login/token', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
