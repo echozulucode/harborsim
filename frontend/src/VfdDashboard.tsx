@@ -53,8 +53,7 @@ export default function VfdDashboard() {
     }
   }, [isRunning, freqRef]);
 
-  // Using comma for decimal separator to match image
-  const formatHz = (val: number) => val.toFixed(1).replace(".", ",");
+  const formatHz = (val: number) => val.toFixed(1);
 
   return (
     <div className="w-full min-h-full p-4 sm:p-6 md:p-8 font-sans bg-[#E0E0E0] text-[#333]">
@@ -64,28 +63,29 @@ export default function VfdDashboard() {
           {/* VFD Panel */}
           <section className="font-bold">
             <h2 className="text-lg tracking-wider text-zinc-700 mb-2">VARIABLE FREQUENCY DRIVE</h2>
-            <div className="bg-[#D1D1D1] p-5 rounded-md shadow-[inset_0_1px_3px_rgba(0,0,0,0.2),0_1px_1px_white] border border-zinc-400/50">
-              
-              {/* LCD Display */}
-              <div className="bg-[#9EB3B3] p-4 rounded text-center shadow-inner border-t border-white/50 border-l border-white/50">
-                <div className="font-mono text-6xl text-zinc-800 tracking-wider">
-                  {formatHz(outFreq)}
-                </div>
-                <div className="text-2xl text-zinc-700 tracking-widest mt-1">
-                  {isFaulted ? "FAULT" : isRunning ? "RUNNING" : "STOPPED"}
-                </div>
-              </div>
-
-              {/* Buttons */}
-              <div className="grid grid-cols-3 gap-3 mt-4">
-                <VfdButton onClick={onRun} disabled={isFaulted || isRunning} className="bg-[#2E7D32] text-white">RUN</VfdButton>
-                <VfdButton onClick={onStop} disabled={isFaulted || !isRunning} className="bg-[#374151] text-white">STOP</VfdButton>
-                <VfdButton onClick={onFaultReset} className="col-start-3 bg-[#BDBDBD] text-zinc-800">FAULT RESET</VfdButton>
-              </div>
-
-              {/* Frequency Reference Slider */}
-              <div className="mt-6">
-                <h3 className="text-center text-md tracking-wider text-zinc-600 mb-2">FREQUENCY REFERENCE</h3>
+                      <div className="bg-[#D1D1D1] p-5 rounded-md shadow-[inset_0_1px_3px_rgba(0,0,0,0.2),0_1px_1px_white] border border-zinc-400/50">
+                        
+                        {/* Core Controls Group */}
+                        <div className="border border-zinc-400/80 shadow-inner rounded p-3 bg-zinc-300/30">
+                          {/* LCD Display */}
+                          <div className="bg-[#9EB3B3] p-4 rounded text-center shadow-inner border-t border-white/50 border-l border-white/50">
+                            <div className="font-mono text-6xl text-zinc-800 tracking-wider">
+                              {formatHz(outFreq)}
+                            </div>
+                            <div className="text-2xl text-zinc-700 tracking-widest mt-1">
+                              {isFaulted ? "FAULT" : isRunning ? "RUNNING" : "STOPPED"}
+                            </div>
+                          </div>
+            
+                                        {/* Buttons */}
+                                        <div className="grid grid-cols-3 gap-3 mt-4">
+                                          <VfdButton onClick={onRun} disabled={isFaulted || isRunning} className="bg-green-600 text-white">RUN</VfdButton>
+                                          <VfdButton onClick={onStop} disabled={isFaulted || !isRunning} className="bg-gray-700 text-white">STOP</VfdButton>
+                                          <VfdButton onClick={onFaultReset} className="col-start-3 bg-gray-400 text-zinc-800">FAULT RESET</VfdButton>
+                                        </div>                        </div>
+            
+                        {/* Frequency Reference Slider */}
+                        <div className="mt-6">                <h3 className="text-center text-md tracking-wider text-zinc-600 mb-2">FREQUENCY REFERENCE</h3>
                 <div className="flex items-center gap-4">
                   <input
                     type="range"
@@ -159,9 +159,9 @@ function StatusIndicator({ icon, label, active, color }: { icon: React.ReactNode
 // Custom Readout Card for Motor values
 function ReadoutCard({ label, value }: { label: string; value: string }) {
     return (
-        <div className="text-center">
-            <h3 className="text-lg tracking-wider text-zinc-700 font-bold">{label}</h3>
-            <p className="font-mono text-6xl text-zinc-800 tracking-wider mt-1">{value}</p>
+        <div className="bg-white p-4 rounded-lg text-center shadow-md border border-zinc-200">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-zinc-500">{label}</h3>
+            <p className="text-5xl font-bold text-zinc-800 mt-1">{value}</p>
         </div>
     );
 }
