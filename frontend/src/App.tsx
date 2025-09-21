@@ -2,11 +2,13 @@ import { useState } from 'react';
 import Login from './Login';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
+import Status from './Status';
 import './App.css';
 
 function App() {
   const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [activeView, setActiveView] = useState('');
 
   const handleSetToken = (token: string) => {
     localStorage.setItem('token', token);
@@ -26,13 +28,22 @@ function App() {
     <div className="app">
       <Navbar token={token} logout={handleLogout} />
       <div className="main-layout">
-        <Sidebar collapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
+        <Sidebar
+          collapsed={sidebarCollapsed}
+          toggleSidebar={toggleSidebar}
+          activeView={activeView}
+          setActiveView={setActiveView}
+        />
         <main className="content">
           {token ? (
-            <div>
-              <h2>Welcome to HarborSim</h2>
-              <p>Select an option from the sidebar to get started.</p>
-            </div>
+            activeView === 'status' ? (
+              <Status />
+            ) : (
+              <div className="p-8">
+                <h2>Welcome to HarborSim</h2>
+                <p>Select an option from the sidebar to get started.</p>
+              </div>
+            )
           ) : (
             <Login setToken={handleSetToken} />
           )}

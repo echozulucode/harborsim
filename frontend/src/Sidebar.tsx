@@ -2,14 +2,24 @@ import React from 'react';
 import { FaTachometerAlt, FaChartLine, FaCog, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import './Sidebar.css';
 
-const Sidebar = ({ collapsed, toggleSidebar }: { collapsed: boolean; toggleSidebar: () => void }) => {
+const Sidebar = ({
+  collapsed,
+  toggleSidebar,
+  activeView,
+  setActiveView,
+}: {
+  collapsed: boolean;
+  toggleSidebar: () => void;
+  activeView: string;
+  setActiveView: (view: string) => void;
+}) => {
   return (
     <div className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
       <div className="sidebar-content">
         <nav>
           <ul>
-            <li>
-              <a href="#">
+            <li className={activeView === 'status' ? 'active' : ''}>
+              <a href="#" onClick={() => setActiveView('status')}>
                 <FaTachometerAlt />
                 {!collapsed && <span>Status</span>}
               </a>

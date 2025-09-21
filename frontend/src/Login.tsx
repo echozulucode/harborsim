@@ -31,7 +31,7 @@ const Login = ({ setToken }: { setToken: (token: string) => void }) => {
   };
 
   return (
-    <div>
+    <div className="p-8">
       <h2>Login</h2>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>

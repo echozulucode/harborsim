@@ -14,6 +14,5 @@
 
 .content {
   flex-grow: 1;
-  padding: 2rem;
   overflow-y: auto; /* Allow content to scroll */
 }
