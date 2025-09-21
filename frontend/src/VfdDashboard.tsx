@@ -1,6 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { FaCheckCircle, FaTimesCircle, FaCog } from "react-icons/fa";
 
+import VfdButton from './VfdButton';
+import StatusIndicator from './StatusIndicator';
+import ReadoutCard from './ReadoutCard';
+
 // VFD Dashboard — TailwindCSS
 // Revised to match the industrial VFD panel example image.
 
@@ -56,7 +60,7 @@ export default function VfdDashboard() {
   const formatHz = (val: number) => val.toFixed(1);
 
   return (
-    <div className="w-full min-h-full p-4 sm:p-6 md:p-8 font-sans bg-[#E0E0E0] text-[#333]">
+    <div className="w-full p-4 sm:p-6 md:p-8 font-sans bg-white text-[#333]">
       <div className="w-full max-w-4xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         
@@ -81,7 +85,7 @@ export default function VfdDashboard() {
                                         <div className="grid grid-cols-3 gap-3 mt-4">
                                           <VfdButton onClick={onRun} disabled={isFaulted || isRunning} className="bg-green-600 text-white">RUN</VfdButton>
                                           <VfdButton onClick={onStop} disabled={isFaulted || !isRunning} className="bg-gray-700 text-white">STOP</VfdButton>
-                                          <VfdButton onClick={onFaultReset} className="col-start-3 bg-gray-400 text-zinc-800">FAULT RESET</VfdButton>
+                                          <VfdButton onClick={onFaultReset} className="bg-white col-start-3 text-sm text-zinc-800">FAULT RESET</VfdButton>
                                         </div>                        </div>
             
                         {/* Frequency Reference Slider */}
@@ -115,8 +119,7 @@ export default function VfdDashboard() {
               <ReadoutCard label="OUTPUT FREQUENCY" value={`${formatHz(outFreq)} Hz`} />
               
               <div className="text-center text-zinc-500">
-                  <FaCog className="text-9xl mx-auto animate-spin" style={{ animationDuration: isRunning ? `${(60 / outFreq) * 0.1}s` : '0s' }}/>
-                  <p className="mt-2 text-sm">(Motor Placeholder)</p>
+                  <FaCog className="text-9xl mx-auto animate-spin" style={{ animationDuration: outFreq > 0.1 ? `${Math.max(0.1, (60 / outFreq) * 0.1)}s` : '0s' }}/>
               </div>
 
               <ReadoutCard label="MOTOR RPM" value={rpm.toString()} />
@@ -126,42 +129,4 @@ export default function VfdDashboard() {
       </div>
     </div>
   );
-}
-
-// Custom Button Component for VFD style
-function VfdButton({ onClick, disabled, className, children }: { onClick: () => void; disabled?: boolean; className?: string; children: React.ReactNode }) {
-  return (
-    <button
-      onClick={onClick}
-      disabled={disabled}
-      className={`
-        h-14 rounded text-lg font-bold tracking-wider shadow-[0_3px_0_0_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.2)] 
-        border border-black/20 transition-all active:shadow-[0_1px_0_0_rgba(0,0,0,0.3),inset_0_2px_2px_rgba(0,0,0,0.2)] active:translate-y-0.5
-        disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-[0_3px_0_0_rgba(0,0,0,0.2)]
-        ${className}
-      `}
-    >
-      {children}
-    </button>
-  );
-}
-
-// Custom Status Indicator Component
-function StatusIndicator({ icon, label, active, color }: { icon: React.ReactNode; label: string; active: boolean; color: string }) {
-    return (
-        <div className={`flex items-center gap-3 text-xl tracking-wider transition-opacity ${active ? `opacity-100 ${color}` : 'opacity-30 text-zinc-600'}`}>
-            {icon}
-            <span>{label}</span>
-        </div>
-    );
-}
-
-// Custom Readout Card for Motor values
-function ReadoutCard({ label, value }: { label: string; value: string }) {
-    return (
-        <div className="bg-white p-4 rounded-lg text-center shadow-md border border-zinc-200">
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-zinc-500">{label}</h3>
-            <p className="text-5xl font-bold text-zinc-800 mt-1">{value}</p>
-        </div>
-    );
 }
