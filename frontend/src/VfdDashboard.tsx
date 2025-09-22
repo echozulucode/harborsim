@@ -1,12 +1,9 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { FaCheckCircle, FaTimesCircle, FaCog } from "react-icons/fa";
-
+import { SpinCog } from "./SpinCog";
 import VfdButton from './VfdButton';
 import StatusIndicator from './StatusIndicator';
 import ReadoutCard from './ReadoutCard';
-
-// VFD Dashboard — TailwindCSS
-// Revised to match the industrial VFD panel example image.
 
 export default function VfdDashboard() {
   const [isRunning, setIsRunning] = useState(false);
@@ -67,7 +64,7 @@ export default function VfdDashboard() {
           {/* VFD Panel */}
           <section className="font-bold">
             <h2 className="text-lg tracking-wider text-zinc-700 mb-2">VARIABLE FREQUENCY DRIVE</h2>
-                      <div className="bg-[#D1D1D1] p-5 rounded-md shadow-[inset_0_1px_3px_rgba(0,0,0,0.2),0_1px_1px_white] border border-zinc-400/50">
+                      <div className="bg-[#fbfbfb] p-5 rounded-md shadow-[inset_0_1px_3px_rgba(0,0,0,0.2),0_1px_1px_white] border border-zinc-400/50">
                         
                         {/* Core Controls Group */}
                         <div className="border border-zinc-400/80 shadow-inner rounded p-3 bg-zinc-300/30">
@@ -85,7 +82,7 @@ export default function VfdDashboard() {
                                         <div className="grid grid-cols-3 gap-3 mt-4">
                                           <VfdButton onClick={onRun} disabled={isFaulted || isRunning} className="bg-green-600 text-white">RUN</VfdButton>
                                           <VfdButton onClick={onStop} disabled={isFaulted || !isRunning} className="bg-gray-700 text-white">STOP</VfdButton>
-                                          <VfdButton onClick={onFaultReset} className="bg-white col-start-3 text-sm text-zinc-800">FAULT RESET</VfdButton>
+                                          <VfdButton onClick={onFaultReset} disabled={!isFaulted} className="bg-black  text-white col-start-3 text-xs">FAULT RESET</VfdButton>
                                         </div>                        </div>
             
                         {/* Frequency Reference Slider */}
@@ -119,7 +116,7 @@ export default function VfdDashboard() {
               <ReadoutCard label="OUTPUT FREQUENCY" value={`${formatHz(outFreq)} Hz`} />
               
               <div className="text-center text-zinc-500">
-                  <FaCog className="text-9xl mx-auto animate-spin" style={{ animationDuration: outFreq > 0.1 ? `${Math.max(0.1, (60 / outFreq) * 0.1)}s` : '0s' }}/>
+                  <SpinCog outFreq={outFreq / 16} />
               </div>
 
               <ReadoutCard label="MOTOR RPM" value={rpm.toString()} />
