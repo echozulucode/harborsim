@@ -1,19 +1,26 @@
 @import "tailwindcss";
 
 .app {
-  height: 100vh;
+  height: 100dvh;
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
 }
 
 .main-layout {
   display: flex;
+  /* This makes the main layout fill the remaining vertical space */
   flex-grow: 1;
-  padding-top: 40px; /* Height of the navbar */
-  box-sizing: border-box;
+  /* Important: This prevents the layout from shrinking smaller than its content */
+  min-height: 0;
 }
 
 .content {
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
-  overflow-y: auto; /* Allow content to scroll */
+  /* Allow content to shrink without overflowing */
+  min-width: 0;
+  /* The content area itself can scroll if its content is too large */
+  overflow: auto;
 }

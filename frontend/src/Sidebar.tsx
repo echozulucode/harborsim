@@ -30,8 +30,8 @@ const Sidebar = ({
                 {!collapsed && <span>Monitoring</span>}
               </a>
             </li>
-            <li>
-              <a href="#">
+            <li className={activeView === 'configuration' ? 'active' : ''}>
+              <a href="#" onClick={() => setActiveView('configuration')}>
                 <FaCog />
                 {!collapsed && <span>Configuration</span>}
               </a>

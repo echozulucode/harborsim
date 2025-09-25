@@ -1,0 +1,40 @@
+/* frontend/src/ConfigurationView.css */
+.reactflow-wrapper {
+    height: 100%;
+    width: 100%;
+  }
+  
+  .reactflow-node {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    background: #fff;
+  }
+  
+  .reactflow-node .reactflow-handle {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #555;
+  }
+  
+  .reactflow-node .reactflow-handle-connecting {
+    background: #ff6060;
+  }
+  
+  .reactflow-edge-path {
+    stroke: #555;
+    stroke-width: 2;
+  }
+  
+  .reactflow-edge-path-animated {
+    stroke-dasharray: 5;
+    animation: dashdraw .5s linear infinite;
+  }
+  
+  @keyframes dashdraw {
+    from {
+      stroke-dashoffset: 10;
+    }
+  }
+  

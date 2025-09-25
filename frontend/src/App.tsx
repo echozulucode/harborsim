@@ -3,6 +3,7 @@ import Login from './Login';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import Status from './Status';
+import ConfigurationView from './ConfigurationView';
 import './App.css';
 
 function App() {
@@ -26,7 +27,9 @@ function App() {
 
   return (
     <div className="app">
+      <header className="navbar">
       <Navbar token={token} logout={handleLogout} />
+      </header>
       <div className="main-layout">
         <Sidebar
           collapsed={sidebarCollapsed}
@@ -38,6 +41,8 @@ function App() {
           {token ? (
             activeView === 'status' ? (
               <Status />
+            ) : activeView === 'configuration' ? (
+              <ConfigurationView />
             ) : (
               <div className="p-8">
                 <h2>Welcome to HarborSim</h2>
