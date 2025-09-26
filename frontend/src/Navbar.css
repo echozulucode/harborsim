@@ -7,6 +7,7 @@
   color: white;
   
   height: 40px; /* Explicit height */
+  width: 100vw;
 }
 
 .navbar-left {
@@ -22,6 +23,7 @@
 .navbar-right {
   display: flex;
   align-items: center;
+  margin-left: auto;
 }
 
 .icon-button {
