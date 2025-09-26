@@ -4,6 +4,7 @@ import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import Status from './Status';
 import ConfigurationView from './ConfigurationView';
+import MonitoringView from './MonitoringView';
 import './App.css';
 
 function App() {
@@ -43,6 +44,8 @@ function App() {
               <Status />
             ) : activeView === 'configuration' ? (
               <ConfigurationView sidebarCollapsed={sidebarCollapsed} />
+            ) : activeView === 'monitoring' ? (
+              <MonitoringView />
             ) : (
               <div className="p-8">
                 <h2>Welcome to HarborSim</h2>

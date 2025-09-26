@@ -24,8 +24,8 @@ const Sidebar = ({
                 {!collapsed && <span>Status</span>}
               </a>
             </li>
-            <li>
-              <a href="#">
+            <li className={activeView === 'monitoring' ? 'active' : ''}>
+              <a href="#" onClick={() => setActiveView('monitoring')}>
                 <FaChartLine />
                 {!collapsed && <span>Monitoring</span>}
               </a>

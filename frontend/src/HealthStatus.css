@@ -1,0 +1,50 @@
+.health-status-container {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.health-category {
+  margin-bottom: 0.5rem;
+}
+
+.category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 3px;
+}
+
+.category-header:hover {
+  background-color: #eee;
+}
+
+.category-title {
+  display: flex;
+  align-items: center;
+}
+
+.icon-ok {
+  color: #27ae60;
+  margin-right: 0.5rem;
+}
+
+.icon-warning {
+  color: #f39c12;
+  margin-right: 0.5rem;
+}
+
+.health-items-list {
+  list-style: none;
+  padding-left: 2rem;
+  margin-top: 0.5rem;
+}
+
+.health-items-list li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}

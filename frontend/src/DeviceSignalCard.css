@@ -1,0 +1,19 @@
+.device-signal-card {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 5px;
+  background: #fff;
+  min-width: 200px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.device-signal-card h4 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.device-signal-card p {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
