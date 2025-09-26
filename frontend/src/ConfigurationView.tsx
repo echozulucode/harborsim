@@ -60,7 +60,7 @@ const ConfigurationView = () => {
   );
 
   return (
-    <div style={{ width: 'calc(100vw - 50px)', height: 'calc(100vh - 25px)' }}>
+    <div style={{ width: 'calc(100vw - 250px)', height: 'calc(100vh - 25px)' }}>
       <ReactFlow
         nodes={nodes}
         edges={edges}

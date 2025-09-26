@@ -13,6 +13,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Make sure the element that wraps the content you want to grow has display: flex */
+#root {
+  display: flex;
+  height: 100vh; /* Needed for vertical flex-grow */
+  width: 100vw;
+  flex-direction: column; /* Optional, depending on your layout */
+}
+
 a {
   font-weight: 500;
   color: #646cff;
