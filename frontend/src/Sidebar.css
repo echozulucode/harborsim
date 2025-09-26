@@ -50,7 +50,8 @@
   text-decoration: none;
 }
 
-.sidebar nav ul li a:hover {
+.sidebar nav ul li a:hover,
+.sidebar nav ul li.active a {
   background-color: #2c3e50;
 }
 

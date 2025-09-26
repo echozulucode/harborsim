@@ -49,19 +49,16 @@ const sampleDevices = [
 const MonitoringView = () => {
   return (
     <div className="monitoring-view">
-      <header className="monitoring-header">
-        <h1>Monitoring Dashboard</h1>
-      </header>
       <div className="monitoring-content">
         <div className="status-section">
           <Alerts alerts={sampleAlerts} />
           <HealthStatus categories={sampleHealthCategories} />
         </div>
         <div className="device-signals">
-          <h2>Device Signals</h2>
+          <h2 className="text-2xl font-bold mb-4">Device Signals</h2>
           {sampleDevices.map((deviceGroup) => (
             <div key={deviceGroup.groupName} className="device-group">
-              <h3>{deviceGroup.groupName}</h3>
+              <h3 className="text-xl font-bold">{deviceGroup.groupName}</h3>
               <div className="signal-cards">
                 {deviceGroup.signals.map((signal) => (
                   <DeviceSignalCard key={signal.name} signal={signal} />
