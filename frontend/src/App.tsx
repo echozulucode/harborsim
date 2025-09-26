@@ -42,7 +42,7 @@ function App() {
             activeView === 'status' ? (
               <Status />
             ) : activeView === 'configuration' ? (
-              <ConfigurationView />
+              <ConfigurationView sidebarCollapsed={sidebarCollapsed} />
             ) : (
               <div className="p-8">
                 <h2>Welcome to HarborSim</h2>

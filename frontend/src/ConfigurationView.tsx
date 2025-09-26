@@ -40,7 +40,7 @@ const initialNodes = [
   },
 ];
 
-const ConfigurationView = () => {
+const ConfigurationView = ({ sidebarCollapsed }: { sidebarCollapsed: boolean }) => {
   const [nodes, setNodes] = useState(initialNodes);
   const [edges, setEdges] = useState([]);
 
@@ -60,7 +60,7 @@ const ConfigurationView = () => {
   );
 
   return (
-    <div style={{ width: 'calc(100vw - 250px)', height: 'calc(100vh - 25px)' }}>
+    <div style={{ width: sidebarCollapsed ? 'calc(100vw - 60px)' : 'calc(100vw - 250px)', height: 'calc(100vh - 25px)' }}>
       <ReactFlow
         nodes={nodes}
         edges={edges}
