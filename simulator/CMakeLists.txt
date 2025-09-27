@@ -1,5 +1,5 @@
 # CMake minimum version
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.14)
 
 # Project name and language
 project(Simulator LANGUAGES CXX)
@@ -9,8 +9,11 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-# Add executable
-add_executable(simulator main.cpp)
+# Include directories
+include_directories(include)
+
+# Add executable from src folder
+add_executable(simulator src/main.cpp)
 
 # To build, create a build directory and run cmake from there:
 # mkdir build
@@ -27,11 +30,25 @@ add_executable(simulator main.cpp)
 # Then compile with:
 # make
 
-# To target x64, you generally don't need to do anything special if you are on an x64 machine.
-# On Windows with Visual Studio, you can use the -A flag for cmake to specify the architecture:
-# cmake -A x64 ..
-# On Linux, the default is usually x64 if that's your system architecture.
-
 install(TARGETS simulator
     RUNTIME DESTINATION bin
 )
+
+# Google Test
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/refs/tags/v1.14.0.zip
+)
+
+# For Windows: Prevent overriding the parent project's compiler options.
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
+
+# Enable testing
+enable_testing()
+
+# Add the test directory
+add_subdirectory(test)
+
+# To run tests, after building, you can run 'ctest' in the build directory.
